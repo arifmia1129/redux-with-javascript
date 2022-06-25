@@ -1,10 +1,12 @@
 // Steps of redux
 /**
  * State
- * Dispatch action
+ * Dispatch action (type, payload)
  * Reducer
- * Store
+ * Store (getState(), dispatch(), subscribe())
  * */
+
+const { createStore } = require("redux");
 
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
@@ -25,7 +27,7 @@ const incrementCounter = () => {
     }
 }
 
-const decrementCouter = () => {
+const decrementCounter = () => {
     return {
         type: DECREMENT
     }
@@ -38,7 +40,8 @@ const addUser = () => {
     }
 }
 
-const counterReducer = (state, action) => {
+// Reducer
+const counterReducer = (state = initialCouterState, action) => {
     switch (action.type) {
         case INCREMENT:
             return {
@@ -55,3 +58,13 @@ const counterReducer = (state, action) => {
             state;
     }
 }
+
+const store = createStore(counterReducer);
+
+store.subscribe(() => {
+    console.log(store.getState());
+});
+
+store.dispatch(incrementCounter());
+store.dispatch(incrementCounter());
+store.dispatch(decrementCounter());
