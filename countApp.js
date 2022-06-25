@@ -54,7 +54,7 @@ const reducerCount = (state = counterInitial, action) => {
 
 
         default:
-            state;
+            return state;
     }
 }
 
